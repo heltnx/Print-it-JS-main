@@ -17,12 +17,13 @@ const slides = [
 	}
 ]
 
-let arrow_left = document.querySelector(".arrow_left")
-arrow_left.addEventListener("click", () => {
-	console.log("fleche gauche")
+let arrow_left = document.querySelector(".arrow_left") // selection class fleche gauche
+arrow_left.addEventListener("click", () => { // ecoute du clck
+	console.log("fleche gauche")          // resultat dans console
 })
 
 let arrow_right = document.querySelector(".arrow_right")
 arrow_right.addEventListener("click", () => {
 	console.log("fleche droite")
 })
+
