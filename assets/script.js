@@ -16,14 +16,60 @@ const slides = [
 		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
 	}
 ]
-
+/* exercice 1 
 let arrow_left = document.querySelector(".arrow_left") // selection class fleche gauche
-arrow_left.addEventListener("click", () => { // ecoute du clck
+arrow_left.addEventListener("click", () => { // écoute du clck
 	console.log("fleche gauche")          // resultat dans console
 })
 
 let arrow_right = document.querySelector(".arrow_right")
 arrow_right.addEventListener("click", () => {
-	console.log("fleche droite")
-})
+     console.log("fleche droite")          // resultat dans console
+}) -----------------------------------------------------*/
+
+
+/* 1- ajouter une variable pour stocker l'index du slide actuel :*/
+
+   let index_actuel = 0
+
+/* 2-  fonction qui mettra à jour le carrousel 
+  en modifiant les éléments HTML correspondants :*/
+
+function update_carousel(){ //selection des elements
+	const banner_image = document.querySelector('.banner-img');
+	const banner_tagLine = document.querySelector('#banner p');
+
+
+  // Récupérer les éléments du slide actuel en utilisant l'index courant
+    const slide_actuel = slides[index_actuel];
+	const image_url = './assets/images/slideshow/' + slide_actuel.image;
+    const tagLineText = slide_actuel.tagLine;
+
+  // Mettre à jour les éléments HTML avec les nouvelles valeurs
+     banner_image.src = image_url;//".banner-img src""./assets/images/slideshow/""slide1.jpg"
+	 banner_tagLine.innerHTML = tagLineText; //"#banner p" "Impressions tous formats..."
+}   
+
+/* 3- fonction pour passer au slide suivant :*/
+
+function slide_suivant(){
+    index_actuel++;
+	 // si l'index dépasse la longueur des slides, le réinitialiser.
+	 if(index_actuel >= slides.length){
+		index_actuel = 0
+	   }
+	 // Mettre à jour le carrousel avec le nouveau slide
+	  update_carousel();
+}
+  
+
+ //****** click sur les flèches ******/ 
+
+  let arrow_right = document.querySelector(".arrow_right");
+  arrow_right.addEventListener("click", slide_suivant); 
+
+
+  
+  
+
 
