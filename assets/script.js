@@ -16,6 +16,7 @@ const slides = [
 		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
 	}
 ]
+
 /* exercice 1 
 let arrow_left = document.querySelector(".arrow_left") // selection class fleche gauche
 arrow_left.addEventListener("click", () => { // écoute du clck
@@ -39,7 +40,6 @@ function update_carousel(){ //selection des elements
 	const banner_image = document.querySelector('.banner-img');
 	const banner_tagLine = document.querySelector('#banner p');
 
-
   // Récupérer les éléments du slide actuel en utilisant l'index courant
     const slide_actuel = slides[index_actuel];
 	const image_url = './assets/images/slideshow/' + slide_actuel.image;
@@ -53,20 +53,29 @@ function update_carousel(){ //selection des elements
 /* 3- fonction pour passer au slide suivant :*/
 
 function slide_suivant(){
-    index_actuel++;
-	 // si l'index dépasse la longueur des slides, le réinitialiser.
-	 if(index_actuel >= slides.length){
+    index_actuel ++;
+	 // si l'index dépasse le nombre de slides, le réinitialiser à 0.
+	 if (index_actuel >= slides.length){
 		index_actuel = 0
 	   }
-	 // Mettre à jour le carrousel avec le nouveau slide
-	  update_carousel();
+	  update_carousel(); // Mettre à jour le carrousel avec le nouveau slide
+}
+
+function slide_precedent (){
+	index_actuel --;
+	if (index_actuel < 0 ){ //si valeur négative, enlever 1
+    index_actuel = slides.length -1 ; // 
+	}
+	update_carousel();
 }
   
-
  //****** click sur les flèches ******/ 
 
-  let arrow_right = document.querySelector(".arrow_right");
-  arrow_right.addEventListener("click", slide_suivant); 
+  let arrow_right = document.querySelector(".arrow_right");//selection flêcche
+  arrow_right.addEventListener("click", slide_suivant); //affecte "slide-suivant" au "click"
+
+  let arrow_left = document.querySelector(".arrow_left");
+  arrow_left.addEventListener("click", slide_precedent);
 
 
   
