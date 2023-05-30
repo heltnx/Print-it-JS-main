@@ -39,16 +39,19 @@ arrow_right.addEventListener("click", () => {
 function update_carousel(){ //selection des elements
 	const banner_image = document.querySelector('.banner-img');
 	const banner_tagLine = document.querySelector('#banner p');
-
+	const dots_container = document.querySelector(".dot")
+   
   // Récupérer les éléments du slide actuel en utilisant l'index courant
     const slide_actuel = slides[index_actuel];
 	const image_url = './assets/images/slideshow/' + slide_actuel.image;
     const tagLineText = slide_actuel.tagLine;
+	const active_dot = document.getElementById(index_actuel);
 
   // Mettre à jour les éléments HTML avec les nouvelles valeurs
      banner_image.src = image_url;//".banner-img src""./assets/images/slideshow/""slide1.jpg"
 	 banner_tagLine.innerHTML = tagLineText; //"#banner p" "Impressions tous formats..."
-}   
+	 active_dot.classList.toggle('dot_selected');
+	}   
 
 /* 3- fonction pour passer au slide suivant :*/
 
@@ -77,8 +80,9 @@ function slide_precedent (){
   let arrow_left = document.querySelector(".arrow_left");
   arrow_left.addEventListener("click", slide_precedent);
 
+//****** dots selected ************** */
 
-  
+
   
 
 
