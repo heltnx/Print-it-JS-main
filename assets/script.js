@@ -32,14 +32,14 @@ arrow_right.addEventListener("click", () => {
 /* 1- ajouter une variable pour stocker l'index du slide actuel :*/
 
    let index_actuel = 0
-
+   
 /* 2-  fonction qui mettra à jour le carrousel 
   en modifiant les éléments HTML correspondants :*/
 
 function update_carousel(){ //selection des elements
 	const banner_image = document.querySelector('.banner-img');
 	const banner_tagLine = document.querySelector('#banner p');
-	const dots_container = document.querySelector(".dot")
+	
    
   // Récupérer les éléments du slide actuel en utilisant l'index courant
     const slide_actuel = slides[index_actuel];
