@@ -75,11 +75,12 @@ function slide(sens) { // parametre à prendre en compte
 	if (index_actuel < 0) { // si valeur négative, 
 		index_actuel = slides.length - 1; // enlever 1 au 4 éléments du slide (= index 3 qui est la dernière image du carroussel)
 	}
+	
 	update_carousel(); // fonction mettre à jour carroussel
 	update_dots(); // fonction mettre à jour les bullets
 }
 
-//****** click sur les flèches ******/ 
+// 5- ****** click sur les flèches ******/ 
 
 let arrow_left = document.querySelector(".arrow_left"); // selection flêche gauche (par sa class)
 arrow_left.addEventListener("click", () => { // Ajoute un écouteur d'événements de clic à la flèche gauche
