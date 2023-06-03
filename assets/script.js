@@ -1,88 +1,101 @@
 const slides = [
 	{
-		"image":"slide1.jpg",
-		"tagLine":"Impressions tous formats <span>en boutique et en ligne</span>"
+		"image": "slide1.jpg",
+		"tagLine": "Impressions tous formats <span>en boutique et en ligne</span>"
 	},
 	{
-		"image":"slide2.jpg",
-		"tagLine":"Tirages haute définition grand format <span>pour vos bureaux et events</span>"
+		"image": "slide2.jpg",
+		"tagLine": "Tirages haute définition grand format <span>pour vos bureaux et events</span>"
 	},
 	{
-		"image":"slide3.jpg",
-		"tagLine":"Grand choix de couleurs <span>de CMJN aux pantones</span>"
+		"image": "slide3.jpg",
+		"tagLine": "Grand choix de couleurs <span>de CMJN aux pantones</span>"
 	},
 	{
-		"image":"slide4.png",
-		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
+		"image": "slide4.png",
+		"tagLine": "Autocollants <span>avec découpe laser sur mesure</span>"
 	}
 ]
 
-/* exercice 1 
-let arrow_left = document.querySelector(".arrow_left") // selection class fleche gauche
-arrow_left.addEventListener("click", () => { // écoute du clck
-	console.log("fleche gauche")          // resultat dans console
-})
 
-let arrow_right = document.querySelector(".arrow_right")
-arrow_right.addEventListener("click", () => {
-     console.log("fleche droite")          // resultat dans console
-}) -----------------------------------------------------*/
+/* 1- ajouter une variable pour stocker l'index du slide actuel */
 
+let index_actuel = 0
 
-/* 1- ajouter une variable pour stocker l'index du slide actuel :*/
+/* 2- creer une variable pour selectionner les éléments à mettre à jour */
+const banner_image = document.querySelector('.banner-img'); // element "img" class banner-img
+const banner_tagLine = document.querySelector('#banner p'); // element "p" dans la div id banner
+const dots = document.querySelectorAll(".dot"); // "tous les elements" de la class ".dot"
 
-   let index_actuel = 0
-   
-/* 2-  fonction qui mettra à jour le carrousel 
+/* 3- fonction pour mettre à jour le carrousel 
   en modifiant les éléments HTML correspondants :*/
 
-function update_carousel(){ //selection des elements
-	const banner_image = document.querySelector('.banner-img');
-	const banner_tagLine = document.querySelector('#banner p');
-	
-   
-  // Récupérer les éléments du slide actuel en utilisant l'index courant
-    const slide_actuel = slides[index_actuel];
-	const image_url = './assets/images/slideshow/' + slide_actuel.image;
-    const tagLineText = slide_actuel.tagLine;
-	const active_dot = document.getElementById(index_actuel);
+function update_carousel() { 
 
-  // Mettre à jour les éléments HTML avec les nouvelles valeurs
-     banner_image.src = image_url;//".banner-img src""./assets/images/slideshow/""slide1.jpg"
-	 banner_tagLine.innerHTML = tagLineText; //"#banner p" "Impressions tous formats..."
-	 active_dot.classList.toggle('dot_selected');
-	}   
+    // Récupérer la valeur des éléments du slide actuel (en utilisant l'index_actuel)
+	const slide_actuel = slides[index_actuel]; // attribue la valeur-actuelle (0), à l'élément "index" de "slides"(json)
+	const image_url = './assets/images/slideshow/' + slide_actuel.image; // atttribue l'url de l'élément "image" (json index 0)
+	const tagLineText = slide_actuel.tagLine; // attribue l'element "tagline" (json index 0)
 
-/* 3- fonction pour passer au slide suivant :*/
-
-function slide_suivant(){
-    index_actuel ++;
-	 // si l'index dépasse le nombre de slides, le réinitialiser à 0.
-	 if (index_actuel >= slides.length){
-		index_actuel = 0
-	   }
-	  update_carousel(); // Mettre à jour le carrousel avec le nouveau slide
+	// Mettre à jour les éléments HTML avec les nouvelles valeurs
+	banner_image.src = image_url; // ".banner-img src""./assets/images/slideshow/""slide1.jpg"
+	banner_tagLine.innerHTML = tagLineText; //"#banner p" "Impressions tous formats..."
 }
 
-function slide_precedent (){
-	index_actuel --;
-	if (index_actuel < 0 ){ //si valeur négative, enlever 1
-    index_actuel = slides.length -1 ; // 
+/* 3.1- fonction pour mettre à jour les bullets */
+  
+function update_dots() {
+
+	dots.forEach((element, index) => { // pour chaque "element" et "index" 
+
+		if (index != index_actuel) { // si l'index actuel est différent de l'index actif
+			element.classList.remove("dot_selected");  // supprimer la classe "dot_selected"
+
+		} else { //si non,
+			element.classList.add("dot_selected"); //ajouter la classe "dot_selected" 
+		}
+	});
+}
+
+/* 4- fonction pour passer au slide suivant ou précédent :*/
+
+function slide(sens) { // parametre à prendre en compte
+	if (sens == 'gauche') { // si le paramettre est "gauche"
+		index_actuel--; // décrémenter l'index-actuel
+	} else { // sinon
+		index_actuel++; // incrémenter l'index actuel
 	}
-	update_carousel();
+
+	// condition pour boucler à l'infini
+	if (index_actuel >= slides.length) { // si l'index actuel dépasse ou égale les 4 éléments du slide (index 3)
+		index_actuel = 0; // on réinitialise l'index actuel à 0
+
+	} else // si non
+
+	if (index_actuel < 0) { // si valeur négative, 
+		index_actuel = slides.length - 1; // enlever 1 au 4 éléments du slide (= index 3 qui est la dernière image du carroussel)
+	}
+	update_carousel(); // fonction mettre à jour carroussel
+	update_dots(); // fonction mettre à jour les bullets
 }
-  
- //****** click sur les flèches ******/ 
 
-  let arrow_right = document.querySelector(".arrow_right");//selection flêcche
-  arrow_right.addEventListener("click", slide_suivant); //affecte "slide-suivant" au "click"
+//****** click sur les flèches ******/ 
 
-  let arrow_left = document.querySelector(".arrow_left");
-  arrow_left.addEventListener("click", slide_precedent);
-
-//****** dots selected ************** */
+let arrow_left = document.querySelector(".arrow_left"); // selection flêche gauche (par sa class)
+arrow_left.addEventListener("click", () => { // Ajoute un écouteur d'événements de clic à la flèche gauche
+	slide('gauche') // Appelle la fonction slide en passant la valeur 'gauche' comme paramètre, pour faire défiler les slides vers la gauche
+});
 
 
-  
+let arrow_right = document.querySelector(".arrow_right"); // selection flêche droite (par sa class)
+arrow_right.addEventListener("click", () => { // Ajoute un écouteur d'événements de click à la flèche droite
+	slide('droite') // Appelle la fonction slide en passant la valeur 'droite' comme paramètre, pour faire défiler les slides vers la droite
+}); 
+
+
+
+
+
+
 
 
