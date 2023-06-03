@@ -84,13 +84,13 @@ function slide(sens) { // parametre à prendre en compte
 
 let arrow_left = document.querySelector(".arrow_left"); // selection flêche gauche (par sa class)
 arrow_left.addEventListener("click", () => { // Ajoute un écouteur d'événements de clic à la flèche gauche
-	slide('gauche') // Appelle la fonction slide en passant la valeur 'gauche' comme paramètre, pour faire défiler les slides vers la gauche
+	slide('gauche') // Appelle la fonction slide en passant la valeur 'gauche' comme paramètre, pour "décrémenter" et faire défiler les slides vers la gauche
 });
 
 
 let arrow_right = document.querySelector(".arrow_right"); // selection flêche droite (par sa class)
 arrow_right.addEventListener("click", () => { // Ajoute un écouteur d'événements de click à la flèche droite
-	slide('droite') // Appelle la fonction slide en passant la valeur 'droite' comme paramètre, pour faire défiler les slides vers la droite
+	slide('droite') // Appelle la fonction slide en passant la valeur 'droite' comme paramètre, (else) pour incrementer et faire défiler les slides vers la droite
 }); 
 
 
